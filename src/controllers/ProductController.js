@@ -61,9 +61,6 @@ const defaultProducts = [
     isTrial: false,
     isReadyToEat: true
   },
-
-
-
   // 4. Bánh Mật SAKEGO
   {
     id: 5,
@@ -76,21 +73,7 @@ const defaultProducts = [
     isTrial: false,
     isReadyToEat: true
   },
-
   // 5. Snack SAKEGO
-  {
-    id: 6,
-    name: 'Snack SAKEGO Phô Mai',
-    price: 19000,
-    image: '/assets/images/Nền xám.png',
-    description: 'Snack SAKEGO giòn tan, vị phô mai béo ngậy. Sản phẩm ăn liền tiện lợi, thích hợp mọi lúc. Trọng lượng: 60g',
-    category: 'snack',
-    stock: 110,
-    isTrial: false,
-    isReadyToEat: true
-  },
-
-
   // Combo
   {
     id: 7,

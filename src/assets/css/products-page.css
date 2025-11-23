@@ -136,13 +136,20 @@
 }
 
 .btn-search {
-    padding: 13px 20px;
+    padding: 13px 24px;
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
     justify-content: center;
     transition: all 0.3s ease;
     flex-shrink: 0;
@@ -283,45 +290,90 @@
 
 @media (max-width: 768px) {
     .products-filter-bar {
-        padding: 20px 0;
+        padding: 12px 0;
+        background: white;
     }
     
-    .filter-left {
+    .filter-bar-content {
         flex-direction: column;
-        align-items: flex-start;
         gap: 12px;
     }
     
-    .filter-title {
-        font-size: 22px;
+    /* Hide Title Section on Mobile - Keep it Simple */
+    .filter-left {
+        display: none;
     }
     
-    .product-count-display {
-        padding: 6px 16px;
-        font-size: 13px;
-    }
-    
-    .product-count-display span {
-        font-size: 18px;
-    }
-    
+    /* Filter Buttons - Clean 2 Column Grid */
     .filter-buttons-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+        width: 100%;
     }
     
     .filter-btn {
-        flex: 1;
+        padding: 14px 10px;
+        border-radius: 10px;
         justify-content: center;
-        min-width: calc(50% - 4px);
+        font-size: 13px;
+        min-width: auto;
+        background: white;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        font-weight: 600;
     }
     
+    .filter-btn i {
+        font-size: 16px;
+    }
+    
+    .filter-btn.active {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-color: var(--primary-dark);
+        box-shadow: 0 3px 12px rgba(124, 179, 66, 0.3);
+        transform: none;
+    }
+    
+    /* Search Box - Full Width */
     .filter-search-box {
         min-width: auto;
+        width: 100%;
+        grid-column: 1 / -1;
+        border-radius: 10px;
+        background: white;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        flex-direction: row-reverse;
+    }
+    
+    .filter-search-box input {
+        padding: 14px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        flex: 1;
+        order: 2;
+    }
+    
+    .btn-search {
+        padding: 14px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        gap: 0;
+        white-space: nowrap;
+        min-width: auto;
+        order: 1;
+        border-radius: 8px 0 0 8px;
+    }
+    
+    .btn-search i {
+        display: none;
     }
     
     .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding-top: 15px;
     }
 }
 

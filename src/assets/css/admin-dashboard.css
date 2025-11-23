@@ -1159,6 +1159,53 @@
 /* ===================================
    RESPONSIVE
    =================================== */
+
+/* Mobile Menu Toggle - Hidden on desktop */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 10000;
+  background: linear-gradient(135deg, #7CB342, #558B2F);
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 15px rgba(124, 179, 66, 0.4);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(124, 179, 66, 0.5);
+}
+
+.mobile-menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
 @media (max-width: 1200px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1456,6 +1503,13 @@
 }
 
 @media (max-width: 768px) {
+  /* Show Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* Admin Container */
   .admin-container {
     flex-direction: column;
@@ -1470,72 +1524,47 @@
     height: 100vh;
     z-index: 9999;
     transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
 
   .admin-sidebar.mobile-open {
     transform: translateX(0);
   }
 
-  /* Mobile overlay */
-  .mobile-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 9998;
-  }
-
-  .mobile-overlay.active {
-    display: block;
-  }
-
   /* Main content mobile */
   .admin-main {
     margin-left: 0;
-    padding: 15px;
+    padding: 70px 15px 15px;
     width: 100%;
-  }
-
-  .admin-content {
-    padding: 15px;
-  }
-
-  /* Mobile menu button */
-  .mobile-menu-toggle {
-    display: block !important;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9997;
-    background: #7CB342;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
 
   /* Stats Grid */
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 12px;
   }
 
   .stat-card {
-    padding: 20px;
+    padding: 18px;
+    gap: 15px;
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
   }
 
-  .stat-card h3 {
-    font-size: 1.1rem;
+  .stat-content h3 {
+    font-size: 24px;
   }
-
-  .stat-card .stat-value {
-    font-size: 1.8rem;
+  
+  .stat-content p {
+    font-size: 13px;
+  }
+  
+  .stat-subtext {
+    font-size: 11px;
   }
   
   /* Admin Header */
@@ -1543,11 +1572,49 @@
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
-    padding: 60px 15px 15px;
+    margin-bottom: 20px;
   }
 
   .admin-header h1 {
-    font-size: 1.5rem;
+    font-size: 24px;
+  }
+  
+  .admin-header-subtitle {
+    font-size: 13px;
+  }
+  
+  .admin-header-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .today-date {
+    justify-content: center;
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+  
+  /* Dashboard Row */
+  .dashboard-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-card {
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    padding: 15px 18px;
+  }
+  
+  .card-header h3 {
+    font-size: 16px;
+  }
+  
+  .card-body {
+    padding: 18px;
   }
   
   /* Filter Tabs */
@@ -1556,6 +1623,7 @@
     flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    margin-bottom: 15px;
   }
 
   .filter-tabs::-webkit-scrollbar {
@@ -1564,8 +1632,9 @@
 
   .filter-tab {
     padding: 10px 16px;
-    font-size: 0.9rem;
+    font-size: 13px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   
   /* Order Info Grid */
@@ -1582,156 +1651,249 @@
 
   .search-box-admin input {
     font-size: 14px;
-    padding: 12px 15px;
   }
   
-  /* Action Buttons */
-  .action-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .action-buttons .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
   /* Tables Mobile */
-  .admin-table-container {
+  .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 0 -15px;
+    padding: 0 15px;
   }
 
   .admin-table {
-    font-size: 0.85rem;
-    min-width: 600px;
+    font-size: 13px;
+    min-width: 700px;
   }
 
   .admin-table th,
   .admin-table td {
-    padding: 10px 8px;
+    padding: 12px 10px;
+  }
+  
+  .admin-table th {
+    font-size: 12px;
+  }
+  
+  .product-thumbnail {
+    width: 50px;
+    height: 50px;
   }
 
-  /* Product Card Mobile */
-  .product-card-admin {
-    padding: 15px;
+  /* Action Buttons */
+  .action-buttons {
+    gap: 6px;
   }
-
-  .product-card-admin img {
-    height: 120px;
+  
+  .btn-action {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
   }
 
   /* Modal Mobile */
+  .modal-overlay {
+    padding: 10px;
+  }
+
   .modal-content {
-    width: 95%;
-    max-width: 95%;
-    margin: 10px;
-    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 18px 20px;
   }
 
   .modal-header h2 {
-    font-size: 1.3rem;
+    font-size: 18px;
   }
 
   .modal-body {
-    padding: 15px;
+    padding: 20px;
   }
-
-  .form-group label {
-    font-size: 0.9rem;
+  
+  .modal-footer {
+    padding: 15px 20px;
+    flex-wrap: wrap;
   }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 0.95rem;
-    padding: 12px;
+  
+  .btn-modal {
+    flex: 1;
+    min-width: 120px;
+    justify-content: center;
   }
 
   /* Order Details Mobile */
-  .order-items-list {
-    gap: 12px;
+  .order-detail-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .order-detail-section h3 {
+    font-size: 16px;
   }
 
-  .order-item {
-    flex-direction: column;
+  .order-items-list {
+    gap: 10px;
+  }
+
+  .order-item-detail {
+    flex-direction: row;
     align-items: flex-start;
     gap: 12px;
+    padding: 12px;
   }
 
-  .order-item img {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
+  .order-item-detail img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .item-info h4 {
+    font-size: 13px;
+  }
+  
+  .item-info p {
+    font-size: 12px;
+  }
+  
+  .item-price {
+    font-size: 14px;
   }
 
   /* User Detail Modal Mobile */
-  .user-detail-modal .modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
   .user-avatar-large {
     width: 80px;
     height: 80px;
     font-size: 36px;
   }
-
-  /* Buttons Mobile */
-  .btn {
-    padding: 12px 16px;
-    font-size: 0.9rem;
-    min-height: 44px;
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
-  .btn-icon {
-    padding: 10px;
-    min-width: 40px;
-    min-height: 40px;
+  /* Form Mobile */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+
+  /* Notification Dropdown Mobile */
+  .notification-dropdown {
+    left: 10px;
+    right: 10px;
+  }
+
+  /* Sidebar adjustments for mobile */
+  .admin-sidebar-header {
+    padding: 20px 18px;
+  }
+  
+  .admin-logo i {
+    font-size: 35px;
+  }
+  
+  .admin-logo-text h2 {
+    font-size: 22px;
+  }
+  
+  .admin-user-info {
+    padding: 18px;
+  }
+  
+  .admin-notification-section {
+    padding: 12px 18px;
+  }
+  
+  .admin-nav {
+    padding: 15px 0;
+  }
+  
+  .admin-nav-item {
+    padding: 13px 18px;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   /* Extra small mobile */
+  .mobile-menu-toggle {
+    top: 12px;
+    left: 12px;
+    padding: 10px 12px;
+    font-size: 18px;
+  }
+
   .admin-main {
-    padding: 10px;
-  }
-
-  .admin-content {
-    padding: 10px;
-  }
-
-  .admin-header {
-    padding: 60px 10px 10px;
+    padding: 65px 10px 10px;
   }
 
   .admin-header h1 {
-    font-size: 1.3rem;
+    font-size: 20px;
   }
 
   .stat-card {
     padding: 15px;
   }
-
-  .stat-card .stat-value {
-    font-size: 1.5rem;
+  
+  .stat-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
   }
 
-  .stat-card h3 {
-    font-size: 1rem;
+  .stat-content h3 {
+    font-size: 20px;
+  }
+  
+  .stat-content p {
+    font-size: 12px;
   }
 
   .filter-tab {
-    padding: 8px 12px;
-    font-size: 0.85rem;
+    padding: 8px 14px;
+    font-size: 12px;
   }
 
   .modal-content {
+    border-radius: 10px;
+  }
+
+  .modal-header {
     padding: 15px;
   }
 
+  .modal-body {
+    padding: 15px;
+  }
+  
+  .modal-footer {
+    padding: 12px 15px;
+  }
+
   .admin-table {
-    font-size: 0.8rem;
+    font-size: 12px;
+  }
+  
+  .order-item-detail img {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .btn-modal {
+    padding: 10px 18px;
+    font-size: 13px;
   }
 }
 

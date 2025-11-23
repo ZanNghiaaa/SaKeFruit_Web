@@ -12,6 +12,7 @@ const AdminLayout = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
   // Redirect if not admin
   React.useEffect(() => {
@@ -69,8 +70,24 @@ const AdminLayout = () => {
 
   return (
     <div className="admin-container">
+      {/* Mobile Menu Toggle */}
+      <button 
+        className="mobile-menu-toggle"
+        onClick={() => setShowMobileSidebar(!showMobileSidebar)}
+      >
+        <i className={`fas ${showMobileSidebar ? 'fa-times' : 'fa-bars'}`}></i>
+      </button>
+
+      {/* Mobile Overlay */}
+      {showMobileSidebar && (
+        <div 
+          className="mobile-overlay active"
+          onClick={() => setShowMobileSidebar(false)}
+        ></div>
+      )}
+
       {/* Admin Sidebar */}
-      <aside className="admin-sidebar">
+      <aside className={`admin-sidebar ${showMobileSidebar ? 'mobile-open' : ''}`}>
         <div className="admin-sidebar-header">
           <div className="admin-logo">
             <i className="fas fa-leaf"></i>

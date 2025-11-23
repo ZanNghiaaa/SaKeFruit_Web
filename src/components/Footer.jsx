@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="newsletter-content">
             <div className="newsletter-text">
               <h2><i className="fas fa-envelope"></i> Đăng Ký Nhận Tin</h2>
-              <p>Nhận thông tin ưu đãi và sản phẩm mới nhất từ Sa Ô Kê</p>
+              <p>Nhận thông tin ưu đãi và sản phẩm mới nhất từ SAKEGO</p>
             </div>
             <form className="newsletter-form" onSubmit={handleNewsletter}>
               <input
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             <div className="social-links">
               <h3>Kết nối với chúng tôi</h3>
-              <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.facebook.com/share/1HzpsrKSFq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
               <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
               <a href="#" target="_blank" rel="noopener noreferrer">Zalo</a>
             </div>

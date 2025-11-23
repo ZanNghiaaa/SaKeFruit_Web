@@ -7,9 +7,32 @@ const Navbar = () => {
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showCombinedMenu, setShowCombinedMenu] = useState(false);
   const { getItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // Close category menu when clicking outside
+    const handleClickOutside = (e) => {
+      if (showCategoryMenu && !e.target.closest('.navbar-left')) {
+        setShowCategoryMenu(false);
+      }
+      if (showUserMenu && !e.target.closest('.user-menu-wrapper')) {
+        setShowUserMenu(false);
+      }
+      if (showMobileMenu && !e.target.closest('.mobile-menu-container')) {
+        setShowMobileMenu(false);
+      }
+      if (showCombinedMenu && !e.target.closest('.combined-menu-wrapper')) {
+        setShowCombinedMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showCategoryMenu, showUserMenu, showMobileMenu, showCombinedMenu]);
 
   useEffect(() => {
     // Check for logged in user on mount
@@ -133,6 +156,12 @@ const Navbar = () => {
             <button className="category-menu-btn" onClick={toggleCategoryMenu}>
               <i className="fas fa-bars"></i> DANH MỤC SẢN PHẨM
             </button>
+            {showCategoryMenu && (
+              <div 
+                className="category-backdrop" 
+                onClick={() => setShowCategoryMenu(false)}
+              ></div>
+            )}
             <div className={`category-dropdown ${showCategoryMenu ? 'active' : ''}`}>
               <ul>
                 <li>
@@ -169,7 +198,58 @@ const Navbar = () => {
             </div>
           </div>
           
-          <ul className="nav-menu">
+          {/* Combined Menu Button for Mobile */}
+          <div className="combined-menu-wrapper">
+            <button 
+              className="combined-menu-btn"
+              onClick={() => setShowCombinedMenu(!showCombinedMenu)}
+            >
+              <i className="fas fa-bars"></i>
+              <span>MENU</span>
+            </button>
+            
+            {showCombinedMenu && (
+              <>
+                <div 
+                  className="combined-menu-backdrop" 
+                  onClick={() => setShowCombinedMenu(false)}
+                ></div>
+                <div className="combined-menu-dropdown">
+                  <div className="combined-menu-header">
+                    <img src="/assets/images/logo_6.png" alt="Logo" />
+                    <span>SAKEFRUIT</span>
+                    <button onClick={() => setShowCombinedMenu(false)}>
+                      <i className="fas fa-times"></i>
+                    </button>
+                  </div>
+                  
+                  <div className="menu-section">
+                    <h3><i className="fas fa-compass"></i> Điều hướng</h3>
+                    <ul>
+                      <li><Link to="/" onClick={() => setShowCombinedMenu(false)}><i className="fas fa-home"></i> Trang chủ</Link></li>
+                      <li><Link to="/about" onClick={() => setShowCombinedMenu(false)}><i className="fas fa-info-circle"></i> Giới thiệu</Link></li>
+                      <li><Link to="/products" onClick={() => setShowCombinedMenu(false)}><i className="fas fa-box"></i> Sản phẩm</Link></li>
+                      <li><Link to="/contact" onClick={() => setShowCombinedMenu(false)}><i className="fas fa-envelope"></i> Liên hệ</Link></li>
+                    </ul>
+                  </div>
+
+                  <div className="menu-section">
+                    <h3><i className="fas fa-list"></i> Danh mục sản phẩm</h3>
+                    <ul>
+                      <li><a href="#" onClick={(e) => { e.preventDefault(); handleFilterCategory('mochi'); setShowCombinedMenu(false); }}><i className="fas fa-cookie"></i> Bánh Mochi Sa Kê</a></li>
+                      <li><a href="#" onClick={(e) => { e.preventDefault(); handleFilterCategory('tea'); setShowCombinedMenu(false); }}><i className="fas fa-mug-hot"></i> Trà Sa Kê</a></li>
+                      <li><a href="#" onClick={(e) => { e.preventDefault(); handleFilterCategory('dried'); setShowCombinedMenu(false); }}><i className="fas fa-seedling"></i> Khô Sa Kê</a></li>
+                      <li><a href="#" onClick={(e) => { e.preventDefault(); handleFilterCategory('honey-cake'); setShowCombinedMenu(false); }}><i className="fas fa-birthday-cake"></i> Bánh Mật Sa Kê</a></li>
+                      <li><a href="#" onClick={(e) => { e.preventDefault(); handleFilterCategory('snack'); setShowCombinedMenu(false); }}><i className="fas fa-cookie-bite"></i> Snack Sa Kê</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Desktop Navigation Menu */}
+          <ul className="nav-menu desktop-only">
             <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Trang chủ</Link></li>
             <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>Giới thiệu</Link></li>
             <li><Link to="/products" className={location.pathname === '/products' ? 'active' : ''}>Sản phẩm</Link></li>

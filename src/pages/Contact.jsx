@@ -261,7 +261,7 @@ const Contact = () => {
               <div className="info-box">
                 <h3><i className="fas fa-share-alt"></i> Kết nối với chúng tôi</h3>
                 <div className="social-links-modern">
-                  <a href="#" className="social-btn facebook" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/share/1HzpsrKSFq/?mibextid=wwXIfr" className="social-btn facebook" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-facebook-f"></i>
                     <span>Facebook</span>
                   </a>

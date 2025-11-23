@@ -69,7 +69,7 @@ const defaultProducts = [
     id: 5,
     name: 'Bánh Mật SAKEGO',
     price: 20000,
-    image: 'public/assets/images/banhmat.png',
+    image: '/assets/images/banhmat.png',
     description: 'Bánh mật SAKEGO thơm ngon, ngọt thanh tự nhiên. Sản phẩm ăn liền tiện lợi cho mọi lứa tuổi. Trọng lượng: 80g',
     category: 'honey-cake',
     stock: 90,

@@ -81,7 +81,8 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: var(--primary-color);
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     
     .logo-text {
@@ -111,6 +112,7 @@
         top: 60px;
         z-index: 999;
         background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .main-navbar .container {
@@ -134,6 +136,8 @@
         font-size: 0.9rem;
         padding: 12px 20px;
         min-height: 48px;
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
     }
     
     .category-dropdown {
@@ -156,6 +160,10 @@
     .mobile-menu-btn {
         order: 2;
         margin-left: auto;
+    }
+
+    .mobile-menu-btn span {
+        background: var(--primary-color);
     }
 
     .nav-menu {
@@ -183,6 +191,7 @@
     .nav-menu li a {
         display: block;
         padding: 12px 20px;
+        color: white;
     }
     
     .search-box {

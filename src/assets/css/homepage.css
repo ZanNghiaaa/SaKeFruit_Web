@@ -215,6 +215,8 @@
 .hero-image {
     position: relative;
     animation: slideLeft 1s ease-out 0.4s both;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .floating-card {
@@ -222,12 +224,15 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     animation: floatCard 6s infinite ease-in-out;
+    max-width: 100%;
 }
 
 .floating-card.card-1 img {
     width: 100%;
+    max-width: 100%;
     height: auto;
     display: block;
+    object-fit: contain;
 }
 
 .floating-card.card-2 {
@@ -648,11 +653,79 @@
 @media (max-width: 768px) {
     .hero-section {
         min-height: auto;
-        padding: 60px 0;
+        padding: 30px 0 40px;
+    }
+    
+    .hero-content {
+        padding: 0;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .hero-image {
+        order: -1;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .floating-card {
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .floating-card.card-1 {
+        margin: 0 auto;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .floating-card.card-1 img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+    
+    .floating-card.card-2 {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    
+    .hero-text-content {
+        text-align: center;
+        padding: 0 15px;
     }
     
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-description {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 25px;
+    }
+    
+    .btn-hero {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
     }
     
     .hero-actions {
@@ -662,6 +735,25 @@
     .hero-stats {
         justify-content: space-around;
         gap: 20px;
+    }
+    
+    .floating-card.card-2 {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 15px 20px;
+    }
+    
+    .badge-quality {
+        gap: 10px;
+    }
+    
+    .badge-quality i {
+        font-size: 24px;
+    }
+    
+    .badge-quality span {
+        font-size: 12px;
     }
     
     .features-grid,
